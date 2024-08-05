@@ -11,7 +11,6 @@ CREATE TABLE
         doj DATE -- Date of Joining
     );
 
-
 INSERT ALL INTO employee (
     emp_id,
     f_name,
@@ -282,7 +281,81 @@ SELECT
 FROM
     dual;
 
-
 -- q1
-select f_name, l_name, job_type from employee;
+select
+    f_name,
+    l_name,
+    job_type
+from
+    employee;
 
+-- q2
+SELECT
+    f_name || ' is a ' || job_type AS employee_details
+FROM
+    employee
+WHERE
+    f_name = 'Arun';
+
+-- q3
+SELECT
+    f_name || '’s monthly salary is Rs. ' || TO_CHAR (salary, 'FM999,999.00') AS monthly_salary_details
+FROM
+    employee;
+
+-- q4
+select
+    d_name
+from
+    department;
+
+-- q5
+SELECT
+    f_name,
+    l_name
+FROM
+    employee
+WHERE
+    dept = 'Sales';
+
+-- q6
+SELECT
+    f_name,
+    l_name
+FROM
+    employee
+WHERE
+    salary > 50000;
+
+-- q7
+SELECT
+    *
+FROM
+    employee
+WHERE
+    manager_id != 1;
+
+-- q8
+SELECT
+    *
+FROM
+    employee
+WHERE
+    salary BETWEEN 40000 AND 70000;
+
+-- q9
+SELECT
+    *
+FROM
+    employee
+WHERE
+    manager_id IN (1, 6, 8);
+
+-- q10
+SELECT
+    f_name,
+    salary
+FROM
+    employee
+WHERE
+    l_name LIKE 'K%';
