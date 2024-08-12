@@ -359,3 +359,154 @@ FROM
     employee
 WHERE
     l_name LIKE 'K%';
+
+-- q_11
+select
+    f_name,
+    salary
+from
+    employee
+where
+    l_name like 'k%r'
+    -- q12
+select
+    *
+from
+    employee
+where
+    substr (l_name, 3, 1) = 'o';
+
+-- q13
+select
+    *
+from
+    employee
+where
+    job_type = 'Engineer'
+    and salary > 50000;
+
+-- q15
+SELECT
+    MIN(salary) AS min_salary,
+    MAX(salary) AS max_salary,
+    SUM(salary) AS total_salary,
+    AVG(salary) AS avg_salary
+FROM
+    employee
+WHERE
+    dept = 'Sales';
+
+-- q16
+SELECT
+    l_name as emp_name
+FROM
+    (
+        SELECT
+            l_name
+        FROM
+            employee
+        ORDER BY
+            l_name ASC
+    )
+WHERE
+    ROWNUM = 1
+UNION ALL
+SELECT
+    f_name
+FROM
+    (
+        SELECT
+            f_name
+        FROM
+            employee
+        ORDER BY
+            f_name DESC
+    )
+WHERE
+    ROWNUM = 1;
+
+-- q17
+SELECT
+    dept,
+    COUNT(*) AS num_employees
+FROM
+    employee
+GROUP BY
+    dept;
+
+-- q18
+SELECT
+    COUNT(DISTINCT dept) AS num_departments
+FROM
+    employee;
+
+-- q19
+SELECT
+    AVG(commission) AS avg_commission
+FROM
+    employee;
+
+-- q20
+select
+    dept,
+    avg(salary) as avg_salary
+from
+    employee
+group by
+    dept;
+
+-- q21
+SELECT
+    dept,
+    job_type,
+    SUM(salary) AS total_salary
+FROM
+    employee
+GROUP BY
+    dept,
+    job_type;
+
+-- q22
+SELECT
+    dept,
+    avg_salary
+FROM
+    (
+        SELECT
+            dept,
+            AVG(salary) AS avg_salary
+        FROM
+            employee
+        GROUP BY
+            dept
+    ) subquery
+WHERE
+    avg_salary > 40000;
+
+-- q24
+SELECT
+    dept
+FROM
+    (
+        SELECT
+            dept,
+            AVG(salary) AS avg_salary
+        FROM
+            employee
+        GROUP BY
+            dept
+    ) subquery
+WHERE
+    avg_salary = (
+        SELECT
+            MAX(avg_salary)
+        FROM
+            (
+                SELECT
+                    AVG(salary) AS avg_salary
+                FROM
+                    employee
+                GROUP BY
+                    dept
+            )
+    );
