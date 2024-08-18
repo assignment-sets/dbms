@@ -103,3 +103,102 @@ FROM
     employee
 WHERE
     DEPT = 'Sales';
+
+-- q7
+SELECT
+    EMP_ID,
+    DOJ,
+    round(MONTHS_BETWEEN(SYSDATE, DOJ), 2) AS MONTHS_EXPERIENCE
+FROM
+    employee
+WHERE
+    DEPT = 'Sales';
+
+--------------------------------------------------
+SELECT
+    EMP_ID,
+    DOJ,
+    ADD_MONTHS(DOJ, 6) AS DOJ_AFTER_6_MONTHS
+FROM
+    employee
+WHERE
+    DEPT = 'Sales';
+
+--------------------------------------------------
+SELECT
+    EMP_ID,
+    DOJ,
+    NEXT_DAY(DOJ, 'SUNDAY') AS NEXT_SUNDAY
+FROM
+    employee
+WHERE
+    DEPT = 'Sales';
+
+--------------------------------------------------
+SELECT
+    EMP_ID,
+    DOJ,
+    LAST_DAY(DOJ) AS LAST_DAY_OF_MONTH
+FROM
+    employee
+WHERE
+    DEPT = 'Sales';
+
+--------------------------------------------------
+SELECT
+    EMP_ID,
+    DOJ,
+    TO_CHAR(DOJ, 'DD-MON-YYYY') AS DOJ_FORMATTED
+FROM
+    employee
+WHERE
+    DEPT = 'Sales';
+
+-- q8
+SELECT
+    EMP_ID,
+    SALARY,
+    CASE
+        WHEN DEPT = 'Sales' THEN SALARY * 1.10
+        WHEN DEPT = 'Marketing' THEN SALARY * 1.20
+        ELSE SALARY
+    END AS REVISED_SALARY
+FROM
+    employee
+where
+    rownum <= 5;
+
+-- q9
+SELECT
+    EMP_ID,
+    SALARY,
+    CASE
+        WHEN SALARY BETWEEN 0
+        AND 19999 THEN SALARY * 0
+        WHEN SALARY BETWEEN 20000
+        AND 39999 THEN SALARY * 0.09
+        WHEN SALARY BETWEEN 40000
+        AND 59999 THEN SALARY * 0.20
+        WHEN SALARY BETWEEN 60000
+        AND 79999 THEN SALARY * 0.30
+        WHEN SALARY >= 80000 THEN SALARY * 0.45
+    END AS TAX_AMOUNT
+FROM
+    employee
+WHERE
+    DEPT = 'Production';
+
+-- q10
+SELECT
+    *
+FROM
+    employee
+    CROSS JOIN department;
+
+-- q11
+select
+    e.f_name,
+    d.d_loc
+from
+    employee e
+    inner join department d on e.dept = d.d_name;
