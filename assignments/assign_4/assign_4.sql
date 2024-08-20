@@ -202,3 +202,54 @@ select
 from
     employee e
     inner join department d on e.dept = d.d_name;
+
+-- q12
+SELECT
+    *
+FROM
+    employee NATURAL
+    JOIN department
+where
+    rownum <= 1;
+
+--------------------------------------------------
+select
+    e.f_name,
+    d.d_loc
+from
+    employee e
+    inner join department d on e.dept = d.d_name
+where
+    rownum <= 2;
+
+--------------------------------------------------
+SELECT
+    e.F_NAME,
+    d.D_LOC
+FROM
+    employee e
+    LEFT OUTER JOIN department d ON e.DEPT = d.D_NAME
+where
+    rownum <= 4;
+
+--------------------------------------------------
+SELECT
+    e.F_NAME,
+    d.D_LOC
+FROM
+    employee e
+    RIGHT OUTER JOIN department d ON e.DEPT = d.D_NAME
+where
+    rownum <= 4;
+
+--------------------------------------------------
+SELECT
+    e.F_NAME,
+    d.D_LOC
+FROM
+    employee e FULL
+    OUTER JOIN department d ON e.DEPT = d.D_NAME
+where
+    rownum <= 4;
+
+
