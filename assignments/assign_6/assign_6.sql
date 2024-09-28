@@ -121,3 +121,16 @@ WHERE
         FROM Employee
         WHERE dept_id = d.dept_id
     );
+
+-- q12
+SELECT 
+    e1.emp_name AS emp1,
+    e2.emp_name AS emp2,
+    e1.salary
+FROM 
+    Employee e1
+JOIN 
+    Employee e2 ON e1.salary = e2.salary
+WHERE 
+    e1.emp_id <> e2.emp_id;
+order by e1.salary desc;
