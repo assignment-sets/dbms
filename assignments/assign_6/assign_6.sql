@@ -134,3 +134,37 @@ JOIN
 WHERE 
     e1.emp_id <> e2.emp_id;
 order by e1.salary desc;
+-- no same sal no op
+
+-- q13
+UPDATE 
+    Employee e
+SET 
+    e.salary = e.salary * 1.10
+WHERE 
+    e.dept_id = (SELECT d.dept_id FROM Department d WHERE d.dept_name = 'Human Resources');
+-- 1 row updated
+
+
+-- q14
+-- invalid question
+
+-- q15
+SELECT 
+    e.emp_name,
+    d.dept_name,
+    e.salary
+FROM 
+    Employee e
+JOIN 
+    Department d ON e.dept_id = d.dept_id
+WHERE 
+    e.salary > (
+        SELECT 
+            AVG(e2.salary)
+        FROM 
+            Employee e2
+        WHERE 
+            e2.dept_id = e.dept_id
+    );
+
