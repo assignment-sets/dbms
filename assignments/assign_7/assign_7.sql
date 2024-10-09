@@ -119,3 +119,42 @@ where salary = (
 )
 
 -- 10
+SELECT MIN(avg_sal_per_job_type) AS lowest_avg_salary
+FROM (
+    SELECT AVG(salary) AS avg_sal_per_job_type
+    FROM job_history
+    GROUP BY job_type
+);
+
+-- 11
+SELECT a.d_name
+FROM (
+    SELECT d_name, MIN(salary) AS min_sal_per_dept
+    FROM job_history
+    GROUP BY d_name
+) a
+JOIN (
+    SELECT MIN(salary) AS sales_min_sal
+    FROM job_history
+    WHERE d_name = 'Sales'
+) b
+ON a.min_sal_per_dept > b.sales_min_sal;
+-- no data found
+
+-- 12
+select distinct a.emp_id from job_history a
+join job_history b on a.emp_id != b.emp_id
+where a.salary = b.salary and a.d_name = b.d_name
+
+-- 13
+SELECT distinct a.emp_id 
+FROM job_history a
+WHERE a.salary < (SELECT MIN(salary) FROM job_history WHERE job_type = 'Engineer')
+AND a.job_type != 'Engineer';
+
+-- 14
+select distinct a.emp_id 
+from job_history a
+where a.salary < (select min(salary) from job_history where job_type = 'Clerk')
+and a.job_type != 'Clerk'
+-- no data found
